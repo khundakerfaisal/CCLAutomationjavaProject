@@ -1,1 +1,1 @@
-# CCLAutomationjavaProject
+# CCLJavaTestingProject

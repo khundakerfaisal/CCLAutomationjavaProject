@@ -1,0 +1,12 @@
+package Purchase;
+
+public class PurchaseRequest {
+
+	public static void main(String[] args) {
+		
+		ChromeDriver driver = new ChromeDriver();		
+		// TODO Auto-generated method stub
+
+	}
+
+}
