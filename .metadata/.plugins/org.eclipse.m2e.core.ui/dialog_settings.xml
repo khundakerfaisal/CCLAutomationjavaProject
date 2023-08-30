@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="C:\CCLAutomationjavaProject"/>
 			<item value="C:\eclips-workspace"/>
 			<item value="C:\eclips-workspace\CPHLPr"/>
 			<item value="C:\eclips-workspace\SeleniumLearning"/>
@@ -47,15 +48,18 @@
 	</section>
 	<section name="MavenProjectWizardArtifactPage">
 		<list key="groupId">
+			<item value="PurchaseRequest"/>
 			<item value="cphl"/>
 			<item value="CPHPr"/>
 			<item value="com.star"/>
 		</list>
 		<list key="name">
+			<item value="CCLPurchaseRequest"/>
 			<item value="gfsdfgfdg"/>
 			<item value="PurchaseRequest"/>
 		</list>
 		<list key="artifactId">
+			<item value="PR"/>
 			<item value="PurchaseRequest"/>
 			<item value="CPHLPr"/>
 		</list>
