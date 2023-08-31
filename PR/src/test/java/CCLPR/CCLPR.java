@@ -1,11 +1,14 @@
 package CCLPR;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.Select;
 //import org.openqa.selenium.support.ui.Select;
 
 public class CCLPR {
@@ -33,34 +36,78 @@ public class CCLPR {
 		Thread.sleep(2000);
 		
 		/* using list of dropdown selection for Dropdown budget cost head
-		 * // List<WebElement> dropdownOptions = driver.findElements(By.
+		 * 
 		 * cssSelector("ul.ui-menu li.ui-menu-item a.dropdown-item.ui-menu-item-wrapper"
-		 * )); // WebElement optionToSelect = dropdownOptions.get(0);
+		 * )); 
 		 */		
-		List<WebElement> dropdownOptions = driver.findElements(By.cssSelector("#ui-id-10"));
-		for (WebElement option : dropdownOptions) {
-			System.out.println(option.getText());
-			option.click();
-			Thread.sleep(2000);
-			}
+		/*
+		 * // List<WebElement> dropdownOptions =
+		 * driver.findElements(By.cssSelector("#ui-id-10")); // 
+		 * for (WebElement option :dropdownOptions) { // 
+		 * System.out.println(option.getText()); //
+		 * option.click(); // 
+		 * Thread.sleep(2000); // }
+		 */		
+		
+		List<WebElement> dropdownOptions = driver.findElements(By.cssSelector("ul.ui-menu li.ui-menu-item a.dropdown-item.ui-menu-item-wrapper"));
+		int count = dropdownOptions.size();
+		System.out.println(count);
+		dropdownOptions.get(count-3).click();
 		
 			/*
 			 * // using Requisition date selection
 			 */
-//		String desiredDate = "08/15/2023";
-		WebElement datePicker = driver.findElement(By.xpath("//input[@data-target='#datepicker137' or @id='o_field_input_106']"));
+
+		WebElement datePicker = driver.findElement(By.xpath("//input[@name='requisition_date']"));
 		datePicker.click();
-//		String[] parts = desiredDate.split("/");
-//		String month = parts[0];
-//		String day = parts[1];
-//		String year = parts[2];
-//		
-//
-//		// Locate the cell corresponding to the desired date and click it
-////		WebElement dateCell = datePicker.findElement(By.xpath("//td[@data-year='" + year + "'][@data-month='" + month + "']/a[text()='" + day + "']"));
-//		WebElement dateCell = datePicker.findElement(By.xpath("//td[text()='\" + day + \"'][@data-month='\" + month + \"']/a[@data-year='\" + year + \"']"));
-//
-//		dateCell.click();
+		LocalDateTime now = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+		String formattedDateTime = now.format(formatter);
+		WebElement dateTimeInput = driver.findElement(By.xpath("//input[@data-target='#datepicker137' or @id='o_field_input_106']")); // Replace with actual locator
+		dateTimeInput.clear();
+		dateTimeInput.sendKeys(formattedDateTime);
+		Thread.sleep(2000);
+		
+		/*
+		 * // using Requisition date selection
+		 */
+		
+
+		
+		
+		WebElement prioritySelect = driver.findElement(By.xpath("//select[@name='priority']"));
+		prioritySelect.click();
+		Select select = new Select(prioritySelect);
+		select.selectByVisibleText("High"); 
+		Thread.sleep(2000);
+		
+		WebElement requirement_forSelect = driver.findElement(By.xpath("//select[@name='requirement_for']"));
+		prioritySelect.click();
+		Select requirement_forselectoptions = new Select(requirement_forSelect);
+		requirement_forselectoptions.selectByVisibleText("Operation"); 
+		Thread.sleep(2000);
+		
+		WebElement requisition_typeSelect = driver.findElement(By.xpath("//select[@name='requisition_type']"));
+		prioritySelect.click();
+		Select requisition_typeselectoptions = new Select(requisition_typeSelect);
+		requisition_typeselectoptions.selectByVisibleText("Local"); 
+		Thread.sleep(2000);
+		
+		WebElement purchase_typeSelect = driver.findElement(By.xpath("//select[@name='purchase_type']"));
+		prioritySelect.click();
+		Select purchase_typeselectoptions = new Select(purchase_typeSelect);
+		purchase_typeselectoptions.selectByVisibleText("New Purchase"); 
+		Thread.sleep(2000);
+
+		
+		WebElement approvebyselect = driver.findElement(By.xpath("//input[contains(@class,'o_input ui-autocomplete-input')]"));
+		approvebyselect.click();
+        
+        WebElement approveoptionToSelect = driver.findElement(By.xpath("//a[contains(@class, 'dropdown-item-wrapper') and text()='Administrator']"));
+        approveoptionToSelect.click();
+		
+		
+
       
       
 		}
