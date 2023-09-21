@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.xml.xpath.XPath;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -40,24 +42,12 @@ public class CCLPR {
 		driver.findElement(By.xpath("//button[@data-original-title='Create record']")).click();
 		Thread.sleep(2000);
 
-		driver.findElement(By.xpath("//input[@id='o_field_input_106']")).click();
+		driver.findElement(By.xpath("//input[@id='o_field_input_107']")).click();
 		Thread.sleep(2000);
 
-		/*
-		 * using list of dropdown selection for Dropdown budget cost head
-		 * 
-		 * cssSelector("ul.ui-menu li.ui-menu-item a.dropdown-item.ui-menu-item-wrapper"
-		 * ));
-		 */
-		/*
-		 * // List<WebElement> dropdownOptions =
-		 * driver.findElements(By.cssSelector("#ui-id-10")); // for (WebElement option
-		 * :dropdownOptions) { // System.out.println(option.getText()); //
-		 * option.click(); // Thread.sleep(2000); // }
-		 */
 
-		List<WebElement> dropdownOptions = driver
-				.findElements(By.cssSelector("ul.ui-menu li.ui-menu-item a.dropdown-item.ui-menu-item-wrapper"));
+
+		List<WebElement> dropdownOptions = driver.findElements(By.cssSelector("ul.ui-menu li.ui-menu-item a.dropdown-item.ui-menu-item-wrapper"));
 		int count = dropdownOptions.size();
 		System.out.println(count);
 		dropdownOptions.get(count - 3).click();
@@ -72,7 +62,7 @@ public class CCLPR {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
 		String formattedDateTime = now.format(formatter);
 		WebElement dateTimeInput = driver
-				.findElement(By.xpath("//input[@data-target='#datepicker137' or @id='o_field_input_107']")); // Replace
+				.findElement(By.xpath("//input[@data-target='#datepicker137' or @id='o_field_input_108']")); // Replace
 																												// with
 																												// actual
 																												// locator
@@ -109,7 +99,7 @@ public class CCLPR {
 		Thread.sleep(2000);
 
 		// Selection Approved by option 
-		WebElement approvebyselect = driver.findElement(By.cssSelector("#o_field_input_109"));
+		WebElement approvebyselect = driver.findElement(By.cssSelector("#o_field_input_110"));
 		approvebyselect.click();
 		Thread.sleep(2000);
 		// Locate the specific option you want to click by its text
@@ -118,6 +108,7 @@ public class CCLPR {
 
 		// Click on the option
 		optionToSelect.click();
+		Thread.sleep(2000);
 		
 		WebElement lineSelection= driver.findElement(By.xpath("//a[text()='Add a line']"));
 		lineSelection.click();
@@ -184,28 +175,28 @@ public class CCLPR {
      //Pr Hod Approval button Pressed
        WebElement PrHodApproval = driver.findElement(By.xpath("//button[@name='button_hod_approve']"));
        PrHodApproval.click();
-       Thread.sleep(3000);
+       Thread.sleep(1000);
        
        //Pr pm Approval button Pressed
        WebElement PrPmApproval = driver.findElement(By.xpath("//button[@name='button_pm_approve']"));
        PrPmApproval.click();
-       Thread.sleep(3000);
+       Thread.sleep(1000);
        
        //Pr pm Ops Approval button Pressed
        WebElement PrPmOpsApproval = driver.findElement(By.xpath("//button[@name='button_pm_ops_approve']"));
        PrPmOpsApproval.click();
-       Thread.sleep(3000);
+       Thread.sleep(1000);
        
        //Pr SCM Approval button Pressed
        WebElement PrScmApproval = driver.findElement(By.xpath("//button[@name='button_scm_approve']"));
        PrScmApproval.click();
-       Thread.sleep(3000);
+       Thread.sleep(1000);
        
        
        //Pr COO Approval button Pressed
        WebElement PrCooApproval = driver.findElement(By.xpath("//button[@name='button_coo_approved']"));
        PrCooApproval.click();
-       Thread.sleep(3000);
+       Thread.sleep(1000);
        
        //Pr Final/Done Approval button Pressed
        WebElement PrFinalApproval = driver.findElement(By.xpath("//button[@name='button_done']"));
@@ -215,6 +206,37 @@ public class CCLPR {
        
        System.out.println("Purchase requsition Successfully Completed!");
        Thread.sleep(3000);
+       
+       WebElement rfqSelection = driver.findElement(By.xpath("//button[@name='create_purchase_agreement']"));
+       rfqSelection.click();
+       Thread.sleep(3000);
+       
+       
+       WebElement rfqVendorSelection = driver.findElement(By.xpath("//button[@name='action_create_multiple_quotation_form']"));
+       rfqVendorSelection.click();
+       Thread.sleep(3000);
+       
+		WebElement vendorDropdown = driver.findElement(By.xpath("//input[@id='o_field_input_366']"));
+		vendorDropdown.click();
+		Thread.sleep(2000);
+
+// RFQ Vendor multiple selection -----------------------------------------
+       
+		List<WebElement> vendorSelection = driver.findElements(By.cssSelector("ul#ui-id-68 li.ui-menu-item"));
+		for (WebElement vendorlistItem : vendorSelection) {
+		    String text = vendorlistItem.getText(); // Get the text of the list item
+		    
+		    // You can add conditions here to decide which items to interact with
+		    if (text.equals("Mayer Dowa Enterprice")) {
+		    	vendorlistItem.click(); // Click the list item
+		    }
+		    if (text.equals("Chowdhury Motors")) {
+		    	vendorlistItem.click(); // Click the list item
+		    }
+		    
+		    // Add more conditions and interactions as needed
+		}
+		Thread.sleep(2000);
        
 
 
