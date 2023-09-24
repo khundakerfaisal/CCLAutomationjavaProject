@@ -219,25 +219,52 @@ public class CCLPR {
 		WebElement vendorDropdown = driver.findElement(By.xpath("//input[@id='o_field_input_366']"));
 		vendorDropdown.click();
 		Thread.sleep(2000);
+		
+		WebElement dropdown = driver.findElement(By.id("ui-id-45"));
 
-// RFQ Vendor multiple selection -----------------------------------------
-       
-		List<WebElement> vendorSelection = driver.findElements(By.cssSelector("ul#ui-id-68 li.ui-menu-item"));
-		for (WebElement vendorlistItem : vendorSelection) {
-		    String text = vendorlistItem.getText(); // Get the text of the list item
-		    
-		    // You can add conditions here to decide which items to interact with
-		    if (text.equals("Mayer Dowa Enterprice")) {
-		    	vendorlistItem.click(); // Click the list item
-		    }
-		    if (text.equals("Chowdhury Motors")) {
-		    	vendorlistItem.click(); // Click the list item
-		    }
-		    
-		    // Add more conditions and interactions as needed
-		}
+		WebElement option1 = dropdown.findElement(By.xpath(".//a[text()='Mayer Dowa Enterprice']"));
+
+		// Click on the option to select it
+		option1.click();
 		Thread.sleep(2000);
-       
+		
+//		WebElement prUnitPrice = dropdown.findElement(By.xpath("//input[@name='price_unit']"));
+//		prUnitPrice.clear();
+//		prUnitPrice.sendKeys("600");
+
+		// Click on the option to select it
+	
+		Thread.sleep(2000);
+		
+		
+//		WebElement vendorDropdown2 = driver.findElement(By.xpath("//input[@id='o_field_input_366']"));
+//		vendorDropdown2.click();
+//		Thread.sleep(2000);
+		
+		
+//		
+//		WebElement dropdown2 = driver.findElement(By.id("ui-id-65"));
+//		WebElement option2 = dropdown2.findElement(By.xpath(".//a[text()='Chowdhury Motors']"));
+//
+//		// Click on the option to select it
+//		option2.click();
+//		Thread.sleep(2000);
+
+		/*
+		 * // RFQ Vendor multiple selection -----------------------------------------
+		 * 
+		 * // List<WebElement> vendorSelection =
+		 * driver.findElements(By.cssSelector("ul#ui-id-68 li.ui-menu-item"));
+		 * List<WebElement> vendorSelection =
+		 * driver.findElements(By.cssSelector("ul#ui-id-45 li.ui-menu-item")); //
+		 * System.out.println(vendorSelection); for (WebElement vendorlistItem :
+		 * vendorSelection) { String text = vendorlistItem.getText(); // Get the text of
+		 * the list item // // // You can add conditions here to decide which items to
+		 * interact with if (text.equals("Chowdhury Motors")) { vendorlistItem.click();
+		 * // Click the list item } // Thread.sleep(2000);
+		 * 
+		 * // Add more conditions and interactions as needed } Thread.sleep(2000);
+		 */
 
 
 
