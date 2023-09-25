@@ -45,9 +45,8 @@ public class CCLPR {
 		driver.findElement(By.xpath("//input[@id='o_field_input_107']")).click();
 		Thread.sleep(2000);
 
-
-
-		List<WebElement> dropdownOptions = driver.findElements(By.cssSelector("ul.ui-menu li.ui-menu-item a.dropdown-item.ui-menu-item-wrapper"));
+		List<WebElement> dropdownOptions = driver
+				.findElements(By.cssSelector("ul.ui-menu li.ui-menu-item a.dropdown-item.ui-menu-item-wrapper"));
 		int count = dropdownOptions.size();
 		System.out.println(count);
 		dropdownOptions.get(count - 3).click();
@@ -98,7 +97,7 @@ public class CCLPR {
 		purchase_typeselectoptions.selectByVisibleText("New Purchase");
 		Thread.sleep(2000);
 
-		// Selection Approved by option 
+		// Selection Approved by option
 		WebElement approvebyselect = driver.findElement(By.cssSelector("#o_field_input_110"));
 		approvebyselect.click();
 		Thread.sleep(2000);
@@ -109,117 +108,135 @@ public class CCLPR {
 		// Click on the option
 		optionToSelect.click();
 		Thread.sleep(2000);
-		
-		WebElement lineSelection= driver.findElement(By.xpath("//a[text()='Add a line']"));
+
+		WebElement lineSelection = driver.findElement(By.xpath("//a[text()='Add a line']"));
 		lineSelection.click();
 		Thread.sleep(2000);
 		
-		WebElement dropdownElementProduct = driver.findElement(By.xpath("//td[@name='product_id']"));
-		dropdownElementProduct.click();
-		Thread.sleep(2000);
-		
-		 WebElement itemToSelect = driver.findElement(By.xpath("//a[contains(text(), '02 pin plug - (91E6100112)')]"));
-	     itemToSelect.click();
-	     Thread.sleep(2000);
-	     
-	     WebElement prQty = driver.findElement(By.xpath("//input[@name='product_qty']"));
-	     prQty.clear();
-         prQty.sendKeys("5.000");
-         Thread.sleep(2000);
-         
-         //Invisible Modal comming for this reason it is need to close [Windows Modal OK button pressed]
-        
-        WebElement okButton = driver.findElement(By.xpath("//button[text()='Ok']"));
-        // Click the "Ok" button
-        okButton.click();
+		//Start Using Singel item selection with out loop //
 
-		/*
-		 * //Second line Product add purpose WebElement lineSelection2=
-		 * driver.findElement(By.xpath("//a[text()='Add a line']"));
-		 * lineSelection2.click(); Thread.sleep(2000);
-		 * 
-		 * 
-		 * //Second Product selection WebElement dropdownElementProduct2 =
-		 * driver.findElement(By.xpath("//td[@name='product_id']"));
-		 * dropdownElementProduct2.click(); Thread.sleep(2000);
-		 * 
-		 * //Second Product item final selection
-		 * 
-		 * WebElement item2ToSelect = driver.findElement(By.
-		 * xpath("//a[contains(text(), '02 pin plug - (91E6100112)')]"));
-		 * item2ToSelect.click(); Thread.sleep(3000); // WebElement item2ToSelect =
-		 * driver.findElement(By.
-		 * xpath("//a[contains(text(), '04 Way Switch - (9137503800)')]")); //
-		 * item2ToSelect.click(); // Thread.sleep(2000);
-		 * 
-		 * 
-		 * 
-		 * 
-		 * WebElement prQty2 =
-		 * driver.findElement(By.xpath("//input[@name='product_qty']")); prQty2.clear();
-		 * prQty2.sendKeys("4");
-		 * 
-		 * Thread.sleep(2000);
-		 * 
-		 * //Invisible Modal comming for this reason it is need to close [Windows Modal
-		 * OK button pressed]
-		 * 
-		 * WebElement okButton2 = driver.findElement(By.xpath("//button[text()='Ok']"));
-		 * // Click the "Ok" button okButton2.click(); Thread.sleep(2000);
-		 */
-       //Pr Save button Pressed
-       WebElement prSubmit = driver.findElement(By.xpath("//button[@title='Save record']"));
-       prSubmit.click();
-       Thread.sleep(3000);
-       
-     //Pr Hod Approval button Pressed
-       WebElement PrHodApproval = driver.findElement(By.xpath("//button[@name='button_hod_approve']"));
-       PrHodApproval.click();
-       Thread.sleep(1000);
-       
-       //Pr pm Approval button Pressed
-       WebElement PrPmApproval = driver.findElement(By.xpath("//button[@name='button_pm_approve']"));
-       PrPmApproval.click();
-       Thread.sleep(1000);
-       
-       //Pr pm Ops Approval button Pressed
-       WebElement PrPmOpsApproval = driver.findElement(By.xpath("//button[@name='button_pm_ops_approve']"));
-       PrPmOpsApproval.click();
-       Thread.sleep(1000);
-       
-       //Pr SCM Approval button Pressed
-       WebElement PrScmApproval = driver.findElement(By.xpath("//button[@name='button_scm_approve']"));
-       PrScmApproval.click();
-       Thread.sleep(1000);
-       
-       
-       //Pr COO Approval button Pressed
-       WebElement PrCooApproval = driver.findElement(By.xpath("//button[@name='button_coo_approved']"));
-       PrCooApproval.click();
-       Thread.sleep(1000);
-       
-       //Pr Final/Done Approval button Pressed
-       WebElement PrFinalApproval = driver.findElement(By.xpath("//button[@name='button_done']"));
-       PrFinalApproval.click();
-       Thread.sleep(3000);
-       
-       
-       System.out.println("Purchase requsition Successfully Completed!");
-       Thread.sleep(3000);
-       
-       WebElement rfqSelection = driver.findElement(By.xpath("//button[@name='create_purchase_agreement']"));
-       rfqSelection.click();
-       Thread.sleep(3000);
-       
-       
-       WebElement rfqVendorSelection = driver.findElement(By.xpath("//button[@name='action_create_multiple_quotation_form']"));
-       rfqVendorSelection.click();
-       Thread.sleep(3000);
-       
+//		WebElement dropdownElementProduct = driver.findElement(By.xpath("//td[@name='product_id']"));
+//		dropdownElementProduct.click();
+//		Thread.sleep(2000);
+//
+//		WebElement itemToSelect = driver.findElement(By.xpath("//a[contains(text(), '02 pin plug - (91E6100112)')]"));
+//		itemToSelect.click();
+//		Thread.sleep(2000);
+//
+//		WebElement prQty = driver.findElement(By.xpath("//input[@name='product_qty']"));
+//		prQty.clear();
+//		prQty.sendKeys("5.000");
+//		Thread.sleep(2000);
+
+		// Invisible Modal comming for this reason it is need to close [Windows Modal OK
+		// button pressed]
+
+//		WebElement okButton = driver.findElement(By.xpath("//button[text()='Ok']"));
+//		// Click the "Ok" button
+//		okButton.click();
+//		Thread.sleep(2000);
+		
+		
+		
+		//End  Using Singel item selection with out loop //
+		
+		
+		
+		//Start Array Using multiple item selection with  loop
+
+		String[] dropdownItems = { "02 pin plug - (91E6100112)", "04 Way Switch - (91E6100112)" };
+		int[] quantities = { 5, 4 }; // Corresponding quantities
+		
+		WebElement dropdownElementProduct = driver.findElement(By.xpath("//td[@name='product_id']"));
+		WebElement quantityInput = driver.findElement(By.xpath("//input[@name='product_qty']"));
+
+		// Iterate through the dropdown items and quantities
+		for (int i = 0; i < dropdownItems.length; i++) {
+
+
+			dropdownElementProduct.click();
+
+            // Wait for the specific item in the dropdown to be clickable
+			
+			dropdownElementProduct.sendKeys(dropdownItems[i]);
+			Thread.sleep(5000);
+			dropdownElementProduct.click();
+			Thread.sleep(2000);
+			// Input the quantity
+			
+			quantityInput.clear();
+			
+//			WebElement okButtonpressed = driver.findElement(By.xpath("//button[text()='Ok']"));
+//			// Click the "Ok" button
+//			okButtonpressed.click();
+			quantityInput.sendKeys(String.valueOf(quantities[i]));
+
+			// Perform any other actions or validations as needed
+
+			// Optionally, wait or pause to see the changes
+			try {
+				Thread.sleep(3000); // Wait for 1 second (1000 milliseconds)
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		//End  Array Using multiple item selection with  loop
+		
+		
+
+		driver.quit();
+		
+		// Pr Save button Pressed
+		WebElement prSubmit = driver.findElement(By.xpath("//button[@title='Save record']"));
+		prSubmit.click();
+		Thread.sleep(3000);
+
+		// Pr Hod Approval button Pressed
+		WebElement PrHodApproval = driver.findElement(By.xpath("//button[@name='button_hod_approve']"));
+		PrHodApproval.click();
+		Thread.sleep(1000);
+
+		// Pr pm Approval button Pressed
+		WebElement PrPmApproval = driver.findElement(By.xpath("//button[@name='button_pm_approve']"));
+		PrPmApproval.click();
+		Thread.sleep(1000);
+
+		// Pr pm Ops Approval button Pressed
+		WebElement PrPmOpsApproval = driver.findElement(By.xpath("//button[@name='button_pm_ops_approve']"));
+		PrPmOpsApproval.click();
+		Thread.sleep(1000);
+
+		// Pr SCM Approval button Pressed
+		WebElement PrScmApproval = driver.findElement(By.xpath("//button[@name='button_scm_approve']"));
+		PrScmApproval.click();
+		Thread.sleep(1000);
+
+		// Pr COO Approval button Pressed
+		WebElement PrCooApproval = driver.findElement(By.xpath("//button[@name='button_coo_approved']"));
+		PrCooApproval.click();
+		Thread.sleep(1000);
+
+		// Pr Final/Done Approval button Pressed
+		WebElement PrFinalApproval = driver.findElement(By.xpath("//button[@name='button_done']"));
+		PrFinalApproval.click();
+		Thread.sleep(3000);
+
+		System.out.println("Purchase requsition Successfully Completed!");
+		Thread.sleep(3000);
+
+		WebElement rfqSelection = driver.findElement(By.xpath("//button[@name='create_purchase_agreement']"));
+		rfqSelection.click();
+		Thread.sleep(3000);
+
+		WebElement rfqVendorSelection = driver
+				.findElement(By.xpath("//button[@name='action_create_multiple_quotation_form']"));
+		rfqVendorSelection.click();
+		Thread.sleep(3000);
+
 		WebElement vendorDropdown = driver.findElement(By.xpath("//input[@id='o_field_input_366']"));
 		vendorDropdown.click();
 		Thread.sleep(2000);
-		
+
 		WebElement dropdown = driver.findElement(By.id("ui-id-45"));
 
 		WebElement option1 = dropdown.findElement(By.xpath(".//a[text()='Mayer Dowa Enterprice']"));
@@ -227,21 +244,19 @@ public class CCLPR {
 		// Click on the option to select it
 		option1.click();
 		Thread.sleep(2000);
-		
+
 //		WebElement prUnitPrice = dropdown.findElement(By.xpath("//input[@name='price_unit']"));
 //		prUnitPrice.clear();
 //		prUnitPrice.sendKeys("600");
 
 		// Click on the option to select it
-	
+
 		Thread.sleep(2000);
-		
-		
+
 //		WebElement vendorDropdown2 = driver.findElement(By.xpath("//input[@id='o_field_input_366']"));
 //		vendorDropdown2.click();
 //		Thread.sleep(2000);
-		
-		
+
 //		
 //		WebElement dropdown2 = driver.findElement(By.id("ui-id-65"));
 //		WebElement option2 = dropdown2.findElement(By.xpath(".//a[text()='Chowdhury Motors']"));
@@ -265,10 +280,6 @@ public class CCLPR {
 		 * 
 		 * // Add more conditions and interactions as needed } Thread.sleep(2000);
 		 */
-
-
-
-
 
 	}
 
