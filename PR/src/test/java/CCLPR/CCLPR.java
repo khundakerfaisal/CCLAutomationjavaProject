@@ -26,7 +26,8 @@ public class CCLPR {
 	public static void main(String[] args) throws InterruptedException {
 
 //		WebDriverManager.chromedriver().setup();
-		ChromeDriver driver = new ChromeDriver();
+		WebDriver driver = new ChromeDriver();
+//		ChromeDriver driver = new ChromeDriver();
 		ChromeOptions Option = new ChromeOptions();
 		Option.addArguments("--remote-allow-origins=*");
 		driver.get("http://10.10.14.196:9091/web/login");
@@ -112,80 +113,84 @@ public class CCLPR {
 		WebElement lineSelection = driver.findElement(By.xpath("//a[text()='Add a line']"));
 		lineSelection.click();
 		Thread.sleep(2000);
-		
-		//Start Using Singel item selection with out loop //
 
-//		WebElement dropdownElementProduct = driver.findElement(By.xpath("//td[@name='product_id']"));
-//		dropdownElementProduct.click();
-//		Thread.sleep(2000);
+		// Start Using Singel item selection with out loop //
+
+		WebElement dropdownElementProduct1 = driver.findElement(By.xpath("//td[@name='product_id']"));
+		dropdownElementProduct1.click();
+		Thread.sleep(2000);
 //
-//		WebElement itemToSelect = driver.findElement(By.xpath("//a[contains(text(), '02 pin plug - (91E6100112)')]"));
-//		itemToSelect.click();
-//		Thread.sleep(2000);
+		WebElement itemToSelect = driver.findElement(By.xpath("//a[contains(text(), '02 pin plug - (91E6100112)')]"));
+		itemToSelect.click();
+		Thread.sleep(2000);
 //
-//		WebElement prQty = driver.findElement(By.xpath("//input[@name='product_qty']"));
-//		prQty.clear();
-//		prQty.sendKeys("5.000");
-//		Thread.sleep(2000);
+		WebElement prQty = driver.findElement(By.xpath("//input[@name='product_qty']"));
+		prQty.clear();
+		prQty.sendKeys("5.000");
+		Thread.sleep(2000);
 
 		// Invisible Modal comming for this reason it is need to close [Windows Modal OK
 		// button pressed]
 
-//		WebElement okButton = driver.findElement(By.xpath("//button[text()='Ok']"));
-//		// Click the "Ok" button
-//		okButton.click();
-//		Thread.sleep(2000);
-		
-		
-		
-		//End  Using Singel item selection with out loop //
-		
-		
-		
-		//Start Array Using multiple item selection with  loop
+		WebElement okButton = driver.findElement(By.xpath("//button[text()='Ok']"));
+		// Click the "Ok" button
+		okButton.click();
+		Thread.sleep(2000);
 
-		String[] dropdownItems = { "02 pin plug - (91E6100112)", "04 Way Switch - (91E6100112)" };
-		int[] quantities = { 5, 4 }; // Corresponding quantities
+		// End Using Singel item selection without loop //
 		
-		WebElement dropdownElementProduct = driver.findElement(By.xpath("//td[@name='product_id']"));
-		WebElement quantityInput = driver.findElement(By.xpath("//input[@name='product_qty']"));
+		//Start Using Multiple item selection with  loop
+
+		WebElement lineSelection2 = driver.findElement(By.xpath("//a[text()='Add a line']"));
+		lineSelection2.click();
+		Thread.sleep(2000);
+		// Start Array Using multiple item selection with loop
+
+		String[] dropdownItems = { "04 Way Switch - (91E6100112)" };
+		int[] quantities = { 4 }; // Corresponding quantities
 
 		// Iterate through the dropdown items and quantities
 		for (int i = 0; i < dropdownItems.length; i++) {
 
 
+			WebElement dropdownElementProduct = driver.findElement(By.xpath("//*[@id='o_field_input_165']/div[2]/div/table/tbody/tr[2]/td[1]/div/div[1]/div/input"));
+//            WebElement quantityInput = driver.findElement(By.xpath("//input[@name='product_qty']"));
+
+			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
+			WebElement quantityInput = wait1
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@name='product_qty']")));
+
+			// Click the dropdown element
 			dropdownElementProduct.click();
 
-            // Wait for the specific item in the dropdown to be clickable
-			
-			dropdownElementProduct.sendKeys(dropdownItems[i]);
-			Thread.sleep(5000);
-			dropdownElementProduct.click();
-			Thread.sleep(2000);
+			// Wait for the specific item in the dropdown to be clickable
+
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			WebElement dropdownItem = wait.until(
+					ExpectedConditions.elementToBeClickable(By.xpath("//a[text()='04 Way Switch - (91E6100112)']")));
+//            WebElement dropdownItem = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[text()='" + dropdownItems[i] + "']")));
+			dropdownItem.click();
+
+//            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+
+//            // Click the dropdown item
+//            dropdownItem.click();
+
 			// Input the quantity
-			
 			quantityInput.clear();
-			
-//			WebElement okButtonpressed = driver.findElement(By.xpath("//button[text()='Ok']"));
-//			// Click the "Ok" button
-//			okButtonpressed.click();
 			quantityInput.sendKeys(String.valueOf(quantities[i]));
 
-			// Perform any other actions or validations as needed
-
-			// Optionally, wait or pause to see the changes
+			Thread.sleep(2000);
 			try {
 				Thread.sleep(3000); // Wait for 1 second (1000 milliseconds)
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		//End  Array Using multiple item selection with  loop
-		
-		
+		// End Array Using multiple product item selection with loop
 
-		driver.quit();
-		
+
+
 		// Pr Save button Pressed
 		WebElement prSubmit = driver.findElement(By.xpath("//button[@title='Save record']"));
 		prSubmit.click();
@@ -223,63 +228,48 @@ public class CCLPR {
 
 		System.out.println("Purchase requsition Successfully Completed!");
 		Thread.sleep(3000);
+		
+		//Request for quotation button
 
 		WebElement rfqSelection = driver.findElement(By.xpath("//button[@name='create_purchase_agreement']"));
 		rfqSelection.click();
 		Thread.sleep(3000);
+		
+		//RFQ Vendor mutiple button selection
 
 		WebElement rfqVendorSelection = driver
 				.findElement(By.xpath("//button[@name='action_create_multiple_quotation_form']"));
 		rfqVendorSelection.click();
 		Thread.sleep(3000);
+		
+		
+		// Vendor selection multiple using Array 
+		String[] vendorSelectionRfq = {"Mayer Dowa Enterprice","Chowdhury Motors"};
 
-		WebElement vendorDropdown = driver.findElement(By.xpath("//input[@id='o_field_input_366']"));
-		vendorDropdown.click();
-		Thread.sleep(2000);
+		for (int i = 0; i < vendorSelectionRfq.length; i++) {
+			WebElement vendorDropdown = driver.findElement(By.xpath("//input[@id='o_field_input_369']"));
+			vendorDropdown.click();
+			Thread.sleep(2000);
 
-		WebElement dropdown = driver.findElement(By.id("ui-id-45"));
+			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
+			WebElement vendorSelect = wait1
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[text()='" + vendorSelectionRfq[i] + "']")));
 
-		WebElement option1 = dropdown.findElement(By.xpath(".//a[text()='Mayer Dowa Enterprice']"));
+			// Click the dropdown element
+			vendorSelect.click();
 
-		// Click on the option to select it
-		option1.click();
-		Thread.sleep(2000);
+			// Wait for the specific item in the dropdown to be clickable
 
-//		WebElement prUnitPrice = dropdown.findElement(By.xpath("//input[@name='price_unit']"));
-//		prUnitPrice.clear();
-//		prUnitPrice.sendKeys("600");
+			
+			Thread.sleep(2000);
+			try {
+				Thread.sleep(3000); // Wait for 1 second (1000 milliseconds)
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		//End  Vendor selection multiple using Array 
 
-		// Click on the option to select it
-
-		Thread.sleep(2000);
-
-//		WebElement vendorDropdown2 = driver.findElement(By.xpath("//input[@id='o_field_input_366']"));
-//		vendorDropdown2.click();
-//		Thread.sleep(2000);
-
-//		
-//		WebElement dropdown2 = driver.findElement(By.id("ui-id-65"));
-//		WebElement option2 = dropdown2.findElement(By.xpath(".//a[text()='Chowdhury Motors']"));
-//
-//		// Click on the option to select it
-//		option2.click();
-//		Thread.sleep(2000);
-
-		/*
-		 * // RFQ Vendor multiple selection -----------------------------------------
-		 * 
-		 * // List<WebElement> vendorSelection =
-		 * driver.findElements(By.cssSelector("ul#ui-id-68 li.ui-menu-item"));
-		 * List<WebElement> vendorSelection =
-		 * driver.findElements(By.cssSelector("ul#ui-id-45 li.ui-menu-item")); //
-		 * System.out.println(vendorSelection); for (WebElement vendorlistItem :
-		 * vendorSelection) { String text = vendorlistItem.getText(); // Get the text of
-		 * the list item // // // You can add conditions here to decide which items to
-		 * interact with if (text.equals("Chowdhury Motors")) { vendorlistItem.click();
-		 * // Click the list item } // Thread.sleep(2000);
-		 * 
-		 * // Add more conditions and interactions as needed } Thread.sleep(2000);
-		 */
 
 	}
 
