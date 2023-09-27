@@ -138,8 +138,8 @@ public class CCLPR {
 		Thread.sleep(2000);
 
 		// End Using Singel item selection without loop //
-		
-		//Start Using Multiple item selection with  loop
+
+		// Start Using Multiple item selection with loop
 
 		WebElement lineSelection2 = driver.findElement(By.xpath("//a[text()='Add a line']"));
 		lineSelection2.click();
@@ -152,8 +152,8 @@ public class CCLPR {
 		// Iterate through the dropdown items and quantities
 		for (int i = 0; i < dropdownItems.length; i++) {
 
-
-			WebElement dropdownElementProduct = driver.findElement(By.xpath("//*[@id='o_field_input_165']/div[2]/div/table/tbody/tr[2]/td[1]/div/div[1]/div/input"));
+			WebElement dropdownElementProduct = driver.findElement(
+					By.xpath("//*[@id='o_field_input_165']/div[2]/div/table/tbody/tr[2]/td[1]/div/div[1]/div/input"));
 //            WebElement quantityInput = driver.findElement(By.xpath("//input[@name='product_qty']"));
 
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -188,8 +188,6 @@ public class CCLPR {
 			}
 		}
 		// End Array Using multiple product item selection with loop
-
-
 
 		// Pr Save button Pressed
 		WebElement prSubmit = driver.findElement(By.xpath("//button[@title='Save record']"));
@@ -228,23 +226,22 @@ public class CCLPR {
 
 		System.out.println("Purchase requsition Successfully Completed!");
 		Thread.sleep(3000);
-		
-		//Request for quotation button
+
+		// Request for quotation button
 
 		WebElement rfqSelection = driver.findElement(By.xpath("//button[@name='create_purchase_agreement']"));
 		rfqSelection.click();
 		Thread.sleep(3000);
-		
-		//RFQ Vendor mutiple button selection
+
+		// RFQ Vendor mutiple button selection
 
 		WebElement rfqVendorSelection = driver
 				.findElement(By.xpath("//button[@name='action_create_multiple_quotation_form']"));
 		rfqVendorSelection.click();
 		Thread.sleep(3000);
-		
-		
-		// Vendor selection multiple using Array 
-		String[] vendorSelectionRfq = {"Mayer Dowa Enterprice","Chowdhury Motors"};
+
+		// Vendor selection multiple using Array
+		String[] vendorSelectionRfq = { "Mayer Dowa Enterprice", "Chowdhury Motors" };
 
 		for (int i = 0; i < vendorSelectionRfq.length; i++) {
 			WebElement vendorDropdown = driver.findElement(By.xpath("//input[@id='o_field_input_369']"));
@@ -252,15 +249,14 @@ public class CCLPR {
 			Thread.sleep(2000);
 
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
-			WebElement vendorSelect = wait1
-					.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[text()='" + vendorSelectionRfq[i] + "']")));
+			WebElement vendorSelect = wait1.until(ExpectedConditions
+					.presenceOfElementLocated(By.xpath("//a[text()='" + vendorSelectionRfq[i] + "']")));
 
 			// Click the dropdown element
 			vendorSelect.click();
 
 			// Wait for the specific item in the dropdown to be clickable
 
-			
 			Thread.sleep(2000);
 			try {
 				Thread.sleep(3000); // Wait for 1 second (1000 milliseconds)
@@ -268,9 +264,42 @@ public class CCLPR {
 				e.printStackTrace();
 			}
 		}
-		//End  Vendor selection multiple using Array 
 
 
+		// tr[@class='o_data_row']//td[@name='price_unit']
+		WebElement unitPriceFirstProduct = driver.findElement(By.xpath("tr[@class='o_data_row']//td[@name='price_unit']"));
+		unitPriceFirstProduct.clear();
+		unitPriceFirstProduct.sendKeys("500");
+		Thread.sleep(2000);
+//		
+//		
+//		WebElement unitPriceSecondProduct= driver.findElement(By.xpath("//tr[@class='o_data_row' and @data-id='purchase.order.line_19']//td[@name='price_unit']"));
+//		unitPriceSecondProduct.clear();
+//		unitPriceSecondProduct.sendKeys("750");
+//		Thread.sleep(2000);
+		// End Vendor selection multiple using Array
+
+		inputUnitPrice(driver, "500", 0);
+
+		// Input unit prices for the second row
+		inputUnitPrice(driver, "750", 1);
+
+	}
+
+	public static void inputUnitPrice(WebDriver driver, String price, int rowIndex) {
+		// Find the WebElement for the price_unit field in the specified row
+////		WebElement priceUnitField = driver
+//				.findElement(By.xpath("//tr[@class='o_data_row'][" + (rowIndex + 1) + "]//td[@name='price_unit']"));
+		
+		WebElement priceUnitField = driver.findElement(By.xpath("//tr[@class='o_data_row'][1]//td[@name='price_unit']"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].value = '';", priceUnitField);
+
+
+		// Clear the existing value (if any) in the field
+		priceUnitField.clear();
+
+		// Input the desired unit price into the price_unit field
+		priceUnitField.sendKeys(price);
 	}
 
 }
