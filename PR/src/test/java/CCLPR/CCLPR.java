@@ -265,41 +265,72 @@ public class CCLPR {
 			}
 		}
 
+		try {
+			// Create a WebDriverWait instance with a timeout (in seconds)
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-		// tr[@class='o_data_row']//td[@name='price_unit']
-		WebElement unitPriceFirstProduct = driver.findElement(By.xpath("tr[@class='o_data_row']//td[@name='price_unit']"));
-		unitPriceFirstProduct.clear();
-		unitPriceFirstProduct.sendKeys("500");
-		Thread.sleep(2000);
+			// Wait for the table row to become present
+			WebElement row1 = wait.until(
+					ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[@data-id='purchase.order.line_9']")));
+			WebElement row2 = wait.until(
+					ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[@data-id='purchase.order.line_19']")));
+
+			// Find the "price_unit" input elements within the table rows
+			WebElement input1 = row1.findElement(By.xpath(".//td[@name='price_unit']/input"));
+			WebElement input2 = row2.findElement(By.xpath(".//td[@name='price_unit']/input"));
+
+			// Input values into the input elements
+			input1.sendKeys("500");
+			input2.sendKeys("600");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// Close the WebDriver
+			driver.quit();
+		}
+
+
+
+
+//		try {
+//			// Find the table rows (tr elements) you want to work with
+//			WebElement row1 = driver.findElement(By.xpath("//tr[@data-id='purchase.order.line_9']"));
+//			WebElement input1 = row1.findElement(By.xpath(".//td[@name='price_unit']/input"));
+//			input1.sendKeys("500");
+//			Thread.sleep(2000);
+//
+//			WebElement row2 = driver.findElement(By.xpath("//tr[@data-id='purchase.order.line_19']"));
+//
+//			// Find the "price_unit" input elements within the table rows
+//
+//			WebElement input2 = row2.findElement(By.xpath(".//td[@name='price_unit']/input"));
+//
+//			// Input values into the input elements
+//
+//			input2.sendKeys("650");
+//			Thread.sleep(2000);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			// Close the WebDriver
+//			driver.quit();
+//		}
+
+
+//	public static void inputUnitPrice(WebDriver driver, String price, int rowIndex) {
+//		// Find the WebElement for the price_unit field in the specified row
+//////		WebElement priceUnitField = driver
+////				.findElement(By.xpath("//tr[@class='o_data_row'][" + (rowIndex + 1) + "]//td[@name='price_unit']"));
 //		
-//		
-//		WebElement unitPriceSecondProduct= driver.findElement(By.xpath("//tr[@class='o_data_row' and @data-id='purchase.order.line_19']//td[@name='price_unit']"));
-//		unitPriceSecondProduct.clear();
-//		unitPriceSecondProduct.sendKeys("750");
-//		Thread.sleep(2000);
-		// End Vendor selection multiple using Array
-
-		inputUnitPrice(driver, "500", 0);
-
-		// Input unit prices for the second row
-		inputUnitPrice(driver, "750", 1);
-
+//		WebElement priceUnitField = driver.findElement(By.xpath("//tr[@class='o_data_row'][1]//td[@name='price_unit']"));
+//		((JavascriptExecutor) driver).executeScript("arguments[0].value = '';", priceUnitField);
+//
+//
+//		// Clear the existing value (if any) in the field
+//		priceUnitField.clear();
+//
+//		// Input the desired unit price into the price_unit field
+//		priceUnitField.sendKeys(price);
+//	}
 	}
-
-	public static void inputUnitPrice(WebDriver driver, String price, int rowIndex) {
-		// Find the WebElement for the price_unit field in the specified row
-////		WebElement priceUnitField = driver
-//				.findElement(By.xpath("//tr[@class='o_data_row'][" + (rowIndex + 1) + "]//td[@name='price_unit']"));
-		
-		WebElement priceUnitField = driver.findElement(By.xpath("//tr[@class='o_data_row'][1]//td[@name='price_unit']"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].value = '';", priceUnitField);
-
-
-		// Clear the existing value (if any) in the field
-		priceUnitField.clear();
-
-		// Input the desired unit price into the price_unit field
-		priceUnitField.sendKeys(price);
-	}
-
 }
