@@ -43,7 +43,7 @@ public class CCLPR {
 		driver.findElement(By.xpath("//button[@data-original-title='Create record']")).click();
 		Thread.sleep(2000);
 
-		driver.findElement(By.xpath("//input[@id='o_field_input_107']")).click();
+		driver.findElement(By.xpath("//input[@id='o_field_input_110']")).click();
 		Thread.sleep(2000);
 
 		List<WebElement> dropdownOptions = driver
@@ -62,7 +62,7 @@ public class CCLPR {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
 		String formattedDateTime = now.format(formatter);
 		WebElement dateTimeInput = driver
-				.findElement(By.xpath("//input[@data-target='#datepicker137' or @id='o_field_input_108']")); // Replace
+				.findElement(By.xpath("//input[@data-target='#datepicker142' or @id='o_field_input_111']")); // Replace
 																												// with
 																												// actual
 																												// locator
@@ -99,7 +99,7 @@ public class CCLPR {
 		Thread.sleep(2000);
 
 		// Selection Approved by option
-		WebElement approvebyselect = driver.findElement(By.cssSelector("#o_field_input_110"));
+		WebElement approvebyselect = driver.findElement(By.cssSelector("#o_field_input_113"));
 		approvebyselect.click();
 		Thread.sleep(2000);
 		// Locate the specific option you want to click by its text
@@ -119,11 +119,11 @@ public class CCLPR {
 		WebElement dropdownElementProduct1 = driver.findElement(By.xpath("//td[@name='product_id']"));
 		dropdownElementProduct1.click();
 		Thread.sleep(2000);
-//
+
 		WebElement itemToSelect = driver.findElement(By.xpath("//a[contains(text(), '02 pin plug - (91E6100112)')]"));
 		itemToSelect.click();
 		Thread.sleep(2000);
-//
+
 		WebElement prQty = driver.findElement(By.xpath("//input[@name='product_qty']"));
 		prQty.clear();
 		prQty.sendKeys("5.000");
@@ -153,7 +153,7 @@ public class CCLPR {
 		for (int i = 0; i < dropdownItems.length; i++) {
 
 			WebElement dropdownElementProduct = driver.findElement(
-					By.xpath("//*[@id='o_field_input_165']/div[2]/div/table/tbody/tr[2]/td[1]/div/div[1]/div/input"));
+					By.xpath("//*[@id='o_field_input_168']/div[2]/div/table/tbody/tr[2]/td[1]/div/div[1]/div/input"));
 //            WebElement quantityInput = driver.findElement(By.xpath("//input[@name='product_qty']"));
 
 			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -244,11 +244,13 @@ public class CCLPR {
 		String[] vendorSelectionRfq = { "Mayer Dowa Enterprice", "Chowdhury Motors" };
 
 		for (int i = 0; i < vendorSelectionRfq.length; i++) {
-			WebElement vendorDropdown = driver.findElement(By.xpath("//input[@id='o_field_input_369']"));
-			vendorDropdown.click();
-			Thread.sleep(2000);
+			WebElement vendorDropdown = driver.findElement(By.xpath("//input[@id='o_field_input_372']"));
+//			WebElement vendorDropdown = driver.findElement(By.xpath("//div[@name='vendor_ids']"));
 
-			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
+			vendorDropdown.click();
+			Thread.sleep(200);
+
+			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(20));
 			WebElement vendorSelect = wait1.until(ExpectedConditions
 					.presenceOfElementLocated(By.xpath("//a[text()='" + vendorSelectionRfq[i] + "']")));
 
@@ -272,25 +274,30 @@ public class CCLPR {
 			// Wait for the table row to become present
 			WebElement row1 = wait.until(
 					ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[@data-id='purchase.order.line_9']")));
-			WebElement row2 = wait.until(
-					ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[@data-id='purchase.order.line_19']")));
 
-			// Find the "price_unit" input elements within the table rows
-			WebElement input1 = row1.findElement(By.xpath(".//td[@name='price_unit']/input"));
-			WebElement input2 = row2.findElement(By.xpath(".//td[@name='price_unit']/input"));
+			row1.click();
 
-			// Input values into the input elements
-			input1.sendKeys("500");
-			input2.sendKeys("600");
+			WebElement unitPrice1Selection = row1.findElement(By.xpath("//td[@name='price_unit']/input"));
+			unitPrice1Selection.clear();
+			unitPrice1Selection.sendKeys("500");
+			Thread.sleep(2000);
+//			
+//			WebElement row2 = wait.until(
+//					ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[@data-id='purchase.order.line_19']")));
+//
+//			// Find the "price_unit" input elements within the table rows
+//			WebElement input1 = row1.findElement(By.xpath(".//td[@name='price_unit']/input"));
+//			WebElement input2 = row2.findElement(By.xpath(".//td[@name='price_unit']/input"));
+//
+//			// Input values into the input elements
+//			input1.sendKeys("500");
+//			input2.sendKeys("600");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			// Close the WebDriver
 			driver.quit();
 		}
-
-
-
 
 //		try {
 //			// Find the table rows (tr elements) you want to work with
@@ -315,7 +322,6 @@ public class CCLPR {
 //			// Close the WebDriver
 //			driver.quit();
 //		}
-
 
 //	public static void inputUnitPrice(WebDriver driver, String price, int rowIndex) {
 //		// Find the WebElement for the price_unit field in the specified row
