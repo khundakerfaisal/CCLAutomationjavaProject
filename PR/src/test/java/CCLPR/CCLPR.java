@@ -267,11 +267,14 @@ public class CCLPR {
 			}
 		}
 
-		try {
-			// Create a WebDriverWait instance with a timeout (in seconds)
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-			// Wait for the table row to become present
+
+
+
+		// Create a WebDriverWait instance with a timeout (in seconds)
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+//			// Wait for the table row to become present
 			WebElement row1 = wait.until(
 					ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[@data-id='purchase.order.line_9']")));
 
@@ -281,23 +284,39 @@ public class CCLPR {
 			unitPrice1Selection.clear();
 			unitPrice1Selection.sendKeys("500");
 			Thread.sleep(2000);
+
+			System.out.println("Price assign suceesfully in first table data!");
+			
 //			
-//			WebElement row2 = wait.until(
-//					ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[@data-id='purchase.order.line_19']")));
+//			try {
 //
-//			// Find the "price_unit" input elements within the table rows
-//			WebElement input1 = row1.findElement(By.xpath(".//td[@name='price_unit']/input"));
-//			WebElement input2 = row2.findElement(By.xpath(".//td[@name='price_unit']/input"));
+//			WebDriverWait wait2 = new WebDriverWait(driver, Duration.ofSeconds(30));
+//			
+//			
+//			WebElement rowNumber2 = driver.findElement(By.xpath("//*[@id='o_field_input_406']/div[2]/div[1]/table/tbody/tr[2]/td[7]/input"));
 //
-//			// Input values into the input elements
-//			input1.sendKeys("500");
-//			input2.sendKeys("600");
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			// Close the WebDriver
-			driver.quit();
-		}
+//			// Wait for the element to be clickable
+//			wait2.until(ExpectedConditions.elementToBeClickable(rowNumber2));
+//
+////			WebElement rowNumber2 = wait2.until(
+////					ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[@data-id='purchase.order.line_19']")));
+////			rowNumber2.click();
+//
+////			WebElement unitPriceSelectionNumber2 = rowNumber2.findElement(By.xpath("//td[@name='price_unit']/input"));
+////			unitPriceSelectionNumber2.clear();
+////			unitPriceSelectionNumber2.sendKeys("650");
+//			rowNumber2.clear();
+//			rowNumber2.sendKeys("650");
+//		
+//			Thread.sleep(3000);
+//			System.out.println("Price assign suceesfully in Second table data!");
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			// Close the WebDriver
+//			driver.quit();
+//		}
 
 //		try {
 //			// Find the table rows (tr elements) you want to work with
