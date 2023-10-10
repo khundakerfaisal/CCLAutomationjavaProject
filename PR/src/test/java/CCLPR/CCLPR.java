@@ -271,21 +271,21 @@ public class CCLPR {
 
 
 
-		// Create a WebDriverWait instance with a timeout (in seconds)
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-
-//			// Wait for the table row to become present
-			WebElement row1 = wait.until(
-					ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[@data-id='purchase.order.line_9']")));
-
-			row1.click();
-
-			WebElement unitPrice1Selection = row1.findElement(By.xpath("//td[@name='price_unit']/input"));
-			unitPrice1Selection.clear();
-			unitPrice1Selection.sendKeys("500");
-			Thread.sleep(2000);
-
-			System.out.println("Price assign suceesfully in first table data!");
+//		// Create a WebDriverWait instance with a timeout (in seconds)
+//			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//
+////			// Wait for the table row to become present
+//			WebElement row1 = wait.until(
+//					ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[@data-id='purchase.order.line_9']")));
+//
+//			row1.click();
+//
+//			WebElement unitPrice1Selection = row1.findElement(By.xpath("//td[@name='price_unit']/input"));
+//			unitPrice1Selection.clear();
+//			unitPrice1Selection.sendKeys("500");
+//			Thread.sleep(2000);
+//
+//			System.out.println("Price assign suceesfully in first table data!");
 			
 //			
 //			try {
