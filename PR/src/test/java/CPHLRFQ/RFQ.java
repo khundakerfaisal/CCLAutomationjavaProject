@@ -45,18 +45,22 @@ public class RFQ {
 
 		driver.findElement(By.xpath("//div[@name='purchase_request_id']")).click();
 		Thread.sleep(2000);
+		
+		
+		//PR  First dropdown value selection work start 
 
 		WebElement firstItem = driver.findElement(By.xpath(".//li[@class='ui-menu-item'][1]/a"));
-
 		// Click on the first item
 		firstItem.click();
-
-		System.out.println("Dropdown pr selection perfectly");
+		System.out.println("Dropdown PR selection perfectly");
 		WebElement rfqVendorSelection = driver
 				.findElement(By.xpath("//button[@name='action_create_multiple_quotation_form']"));
 		rfqVendorSelection.click();
 		Thread.sleep(3000);
+		
+		//PR  First dropdown value selection work close 
 
+		
 		// Vendor selection multiple using Array
 		String[] vendorSelectionRfq = { "Mayer Dowa Enterprice", "Chowdhury Motors" };
 
@@ -84,37 +88,51 @@ public class RFQ {
 			}
 		}
 
-		// Create a WebDriverWait instance with a timeout (in seconds)
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		// Table td data unit price input work start
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20)); // Create a WebDriverWait instance with a timeout (in seconds) first cell selection
 
-//		// Wait for the table row to become present
-		WebElement row1 = wait
-				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[@data-id='purchase.order.line_9']")));
 
-		row1.click();
+		WebElement firstCellRfq = wait
+				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[@data-id='purchase.order.line_9']"))); // Wait for the First table cell selection
 
-		WebElement unitPrice1Selection = row1.findElement(By.xpath("//td[@name='price_unit']/input"));
+		firstCellRfq.click();
+		WebElement unitPrice1Selection = firstCellRfq.findElement(By.xpath("//td[@name='price_unit']/input"));					//First row price input button click
 		unitPrice1Selection.clear();
-		unitPrice1Selection.sendKeys("500");
+		unitPrice1Selection.sendKeys("500");						//input/Set First row unit price 
+		unitPrice1Selection.sendKeys(Keys.ENTER);					//Enter Second selected cell 
 		Thread.sleep(2000);
 
 		System.out.println("Price assign suceesfully in first table data!");
+		
+		
 
-		WebDriverWait wait2 = new WebDriverWait(driver, Duration.ofSeconds(30));
-
-//		// Wait for the table row to become present
-		WebElement row2 = wait2.until(
-				ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[@data-id='purchase.order.line_19']")));
-
-		row2.click();
-		Thread.sleep(2000);
-
-		WebElement unitPrice1Selection2 = row2.findElement(By.xpath("//td[7][@name='price_unit']/input"));
-		unitPrice1Selection2.clear();
-		unitPrice1Selection2.sendKeys("800");
-		Thread.sleep(2000);
+		WebDriverWait wait2 = new WebDriverWait(driver, Duration.ofSeconds(30));  // Create a WebDriverWait instance with a timeout (in seconds) Second cell selection
+		WebElement secondCellRfq = wait2.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+				"//td[@class='o_data_cell o_field_cell o_list_number o_required_modifier']/input[@name='price_unit']"))); //Second row price input button click
+		secondCellRfq.click();
+		secondCellRfq.clear();
+		secondCellRfq.sendKeys("800"); 								//input/Set Second row unit price 
 
 		System.out.println("Price assign suceesfully in second table data!");
+		// Table td data unit price input work Close..
+		
+		
+		//RfQ submit button work start ..
+		WebElement rfqSubmit = driver.findElement(By.xpath("//button[@name='action_multiple_quotation_save']")); //RFQ final submission
+		rfqSubmit.click();
+		Thread.sleep(2000);
+		//RfQ submit button work close ..
+		System.out.println("RFQ Submission successfully!");
+		
+		
+		
+		WebElement rfqFinalSubmit = driver.findElement(By.xpath("//button[@class='btn btn-primary o_form_button_save' and @title='Save record']")); //RFQ final submission
+		rfqFinalSubmit.click();
+		Thread.sleep(2000);
+		//RfQ submit button work close ..
+		System.out.println("RFQ Final Submission successfully!");
+		
+		driver.quit();
 
 	}
 
