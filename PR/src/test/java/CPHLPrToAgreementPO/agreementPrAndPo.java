@@ -103,51 +103,125 @@ public class agreementPrAndPo {
 		// Click on the option
 		optionToSelect.click();
 		Thread.sleep(2000);
-
+		
 		WebElement lineSelection = driver.findElement(By.xpath("//a[text()='Add a line']"));
 		lineSelection.click();
 		Thread.sleep(2000);
+		// Assuming you have a WebDriver instance named "driver"
 
-		WebElement dropdownElementProduct1 = driver.findElement(By.xpath("//td[@name='product_id']"));
-		dropdownElementProduct1.click();
-		Thread.sleep(2000);
+		String[] productNames = {"02 pin plug - (91E6100112)", "04 Way Switch - (91E6100112)"};
+		int[] quantities = {4, 6};
 
-		WebElement itemToSelect = driver.findElement(By.xpath("//a[contains(text(), '02 pin plug - (91E6100112)')]"));
-		itemToSelect.click();
-		Thread.sleep(2000);
+		// Find all the rows in the table
+		List<WebElement> rows = driver.findElements(By.cssSelector("tbody tr.o_data_row"));
 
-		WebElement prQty = driver.findElement(By.xpath("//input[@name='product_qty']"));
-		prQty.clear();
-		prQty.sendKeys("5.000");
+		for (int i = 0; i < productNames.length; i++) {
+		    // Find the product input field in the current row
+		    WebElement productInput = rows.get(i).findElement(By.cssSelector("td[name='product_id']"));
+		    productInput.click();
+		    productInput.sendKeys(productNames[i]);
+
+		    // Find the quantity input field in the current row
+		    WebElement quantityInput = rows.get(i).findElement(By.cssSelector("td[name='product_qty']"));
+		    quantityInput.click();
+
+		    // Input the product name and quantity
+		  
+		   
+		    
+		    quantityInput.clear();
+		    quantityInput.sendKeys(String.valueOf(quantities[i]));
+		    
+		    // Optionally, you can submit the form or perform other actions here.
+		}
+
+
+//		String[] prproductName = {"02 pin plug - (91E6100112)","04 Way Switch - (91E6100112)"};
+//		int[] prquantities = { 4,6 };
+//		
+//		WebElement item1=driver.findElement(By.xpath("//td[@name='product_id']"));
+//		item1.click();
 //		Thread.sleep(2000);
+//		
+//		for (int i = 0; i < prproductName.length; i++) {
+//			
+//			
+//			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(20));
+//			
+//			WebElement itemToSelect = wait1.until(
+//					ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), '"+ prproductName[i] +"')]")));
+////			WebElement itemToSelect = driver.findElement(By.xpath("//a[contains(text(), '"+ prproductName[i] +"')]"));
+//			
+//			itemToSelect.click();
+//			Thread.sleep(2000);
+//			
+//			
+//			
+//			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//			WebElement prquantityInput = wait
+//					.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@name='product_qty']")));
+//			prquantityInput.click();
+//			prquantityInput.clear();
+//			
+//		
+//			
+//			prquantityInput.sendKeys(String.valueOf(prquantities[i]));
+//			WebElement okButton = driver.findElement(By.xpath("//button[text()='Ok']"));
+//			// Click the "Ok" button
+//			okButton.click();
+//			Thread.sleep(2000);
+//			
+//			prquantityInput.sendKeys(Keys.ENTER);
+//			
+//			System.out.println("Second line selection");
+//			
+//			}
+		
+		
+		
 		
 		
 
-		// Invisible Modal comming for this reason it is need to close [Windows ModalOK
-		// // button pressed]
-
-		WebElement okButton = driver.findElement(By.xpath("//button[text()='Ok']"));
-		// Click the "Ok" button
-
-		okButton.click();
-		Thread.sleep(2000);
-		prQty.sendKeys(Keys.ENTER);
+//		WebElement dropdownElementProduct1 = driver.findElement(By.xpath("//td[@name='product_id']"));
+//		dropdownElementProduct1.click();
+//		Thread.sleep(2000);
+//
+//		WebElement itemToSelect = driver.findElement(By.xpath("//a[contains(text(), '02 pin plug - (91E6100112)')]"));
+//		itemToSelect.click();
+//		Thread.sleep(2000);
+//
+//		WebElement prQty = driver.findElement(By.xpath("//input[@name='product_qty']"));
+//		prQty.clear();
+//		prQty.sendKeys("5.000");
+////		Thread.sleep(2000);
+//		
+//		
+//
+//		// Invisible Modal comming for this reason it is need to close [Windows ModalOK
+//		// // button pressed]
+//
+//		WebElement okButton = driver.findElement(By.xpath("//button[text()='Ok']"));
+//		// Click the "Ok" button
+//
+//		okButton.click();
+//		Thread.sleep(2000);
+//		prQty.sendKeys(Keys.ENTER);
 		
 		
 		
-		WebElement dropdownElementProduct2 = driver.findElement(By.xpath("//td[@name='product_id']"));
-		dropdownElementProduct2.click();
-		Thread.sleep(2000);
-
-		WebElement itemToSelect2 = driver.findElement(By.xpath("//a[contains(text(), '04 Way Switch - (91E6100112)']')]"));
-		itemToSelect2.click();
-		Thread.sleep(2000);
-
-		WebElement prQty2 = driver.findElement(By.xpath("//input[@name='product_qty']"));
-		prQty2.clear();
-		prQty2.sendKeys("6.000");
-		Thread.sleep(2000);
-		
+//		WebElement dropdownElementProduct2 = driver.findElement(By.xpath("//td[@name='product_id']"));
+//		dropdownElementProduct2.click();
+//		Thread.sleep(2000);
+//
+//		WebElement itemToSelect2 = driver.findElement(By.xpath("//a[contains(text(), '04 Way Switch - (91E6100112)']')]"));
+//		itemToSelect2.click();
+//		Thread.sleep(2000);
+//
+//		WebElement prQty2 = driver.findElement(By.xpath("//input[@name='product_qty']"));
+//		prQty2.clear();
+//		prQty2.sendKeys("6.000");
+//		Thread.sleep(2000);
+//		
 		
 
 		/*
