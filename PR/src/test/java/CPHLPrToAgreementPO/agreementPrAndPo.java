@@ -269,7 +269,7 @@ public class agreementPrAndPo {
 		Thread.sleep(2000);
 
 		WebElement budgetValueSelect = driver.findElement(By.xpath(
-				"//li/a[text()='A. Fixed Plant Overhead - 3.Overtime & Holiday Bill - 2022-2023 (CPBL) (931895.8200000001) (1079830.0)']"));
+				"//li/a[text()='A. Fixed Plant Overhead - 3.Overtime & Holiday Bill - 2022-2023 (CPBL) (923995.8200000001) (1079830.0)']"));
 		budgetValueSelect.click();
 		Thread.sleep(2000);
 
@@ -315,13 +315,29 @@ public class agreementPrAndPo {
 		secondCellRfq.sendKeys("700"); // input/Set Second row unit price
 
 		System.out.println("Price assign suceesfully in second table data!");
-		
+
 		// Local Po submit button work start ..
-		WebElement LocalPOAgrementSubmit = driver.findElement(By.xpath("//button[@title='Save record']")); // RFQ final submission
+		WebElement LocalPOAgrementSubmit = driver.findElement(By.xpath("//button[@title='Save record']")); // RFQ final
+																											// submission
 		LocalPOAgrementSubmit.click();
 		Thread.sleep(2000);
 		// RfQ submit button work close ..
 		System.out.println("Local PO Agrement Created successfully!");
+
+		WebElement scmApproval = driver.findElement(By.xpath("//button[@name='send_for_scm_approval']"));
+		scmApproval.click();
+		Thread.sleep(1000);
+		WebElement scmCooApproval = driver.findElement(By.xpath("//button[@name='send_for_scm_coo_approval']"));
+		scmCooApproval.click();
+		Thread.sleep(1000);
+		WebElement buttonConfirm = driver.findElement(By.xpath("//button[@name='button_confirm']"));
+		buttonConfirm.click();
+		Thread.sleep(1000);
+		WebElement buttonApproveAgreement = driver.findElement(By.xpath("//button[@name='button_approve']"));
+		buttonApproveAgreement.click();
+		Thread.sleep(1000);
+		
+		System.out.println("Purchase Agreement successfully created");
 
 
 	}
