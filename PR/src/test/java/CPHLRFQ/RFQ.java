@@ -32,9 +32,14 @@ public class RFQ {
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//a[@data-menu-xmlid='purchase.menu_purchase_root']")).click();
 		Thread.sleep(2000);
+		
+		//Order root menu selection
 
 		driver.findElement(By.xpath("//button[@data-menu-xmlid='purchase.menu_procurement_management']")).click();
 		Thread.sleep(2000);
+		
+		//RFQ Sub menu selection
+
 
 		driver.findElement(By.xpath("//a[@data-menu-xmlid='purchase_requisition.menu_purchase_requisition_pro_mgt']"))
 				.click();

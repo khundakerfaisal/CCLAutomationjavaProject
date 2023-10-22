@@ -43,7 +43,7 @@ public class CCLPR {
 		driver.findElement(By.xpath("//button[@data-original-title='Create record']")).click();
 		Thread.sleep(2000);
 
-		driver.findElement(By.xpath("//input[@id='o_field_input_110']")).click();
+		driver.findElement(By.xpath("//div[@name='budget_line_id']")).click();
 		Thread.sleep(2000);
 
 		List<WebElement> dropdownOptions = driver
@@ -61,11 +61,13 @@ public class CCLPR {
 		LocalDateTime now = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
 		String formattedDateTime = now.format(formatter);
-		WebElement dateTimeInput = driver
-				.findElement(By.xpath("//input[@data-target='#datepicker142' or @id='o_field_input_111']")); // Replace
-																												// with
-																												// actual
-																												// locator
+		WebElement dateTimeInput = driver.findElement(By.xpath("//div[@name='requisition_date']/input"));
+
+////		WebElement dateTimeInput = driver
+////				.findElement(By.xpath("//input[@data-target='#datepicker142' or @id='o_field_input_111']")); // Replace
+//																												 with
+//																												// actual
+//																												// locator
 		dateTimeInput.clear();
 		dateTimeInput.sendKeys(formattedDateTime);
 		Thread.sleep(2000);
@@ -99,7 +101,7 @@ public class CCLPR {
 		Thread.sleep(2000);
 
 		// Selection Approved by option
-		WebElement approvebyselect = driver.findElement(By.cssSelector("#o_field_input_113"));
+		WebElement approvebyselect = driver.findElement(By.xpath("//div[@name='assigned_to']"));
 		approvebyselect.click();
 		Thread.sleep(2000);
 		// Locate the specific option you want to click by its text
@@ -232,42 +234,44 @@ public class CCLPR {
 		WebElement rfqSelection = driver.findElement(By.xpath("//button[@name='create_purchase_agreement']"));
 		rfqSelection.click();
 		Thread.sleep(3000);
+		
+		driver.quit();
 
-		// RFQ Vendor mutiple button selection
-
-		WebElement rfqVendorSelection = driver
-				.findElement(By.xpath("//button[@name='action_create_multiple_quotation_form']"));
-		rfqVendorSelection.click();
-		Thread.sleep(3000);
-
-		// Vendor selection multiple using Array
-		String[] vendorSelectionRfq = { "Mayer Dowa Enterprice", "Chowdhury Motors" };
-
-		for (int i = 0; i < vendorSelectionRfq.length; i++) {
-			WebElement vendorDropdown = driver.findElement(By.xpath("//input[@id='o_field_input_372']"));
-//			WebElement vendorDropdown = driver.findElement(By.xpath("//div[@name='vendor_ids']"));
-
-			vendorDropdown.click();
-			Thread.sleep(200);
-
-			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(20));
-			WebElement vendorSelect = wait1.until(ExpectedConditions
-					.presenceOfElementLocated(By.xpath("//a[text()='" + vendorSelectionRfq[i] + "']")));
-
-			// Click the dropdown element
-			vendorSelect.click();
-
-			// Wait for the specific item in the dropdown to be clickable
-
-			Thread.sleep(2000);
-			try {
-				Thread.sleep(3000); // Wait for 1 second (1000 milliseconds)
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-
-
+//		// RFQ Vendor mutiple button selection
+//
+//		WebElement rfqVendorSelection = driver
+//				.findElement(By.xpath("//button[@name='action_create_multiple_quotation_form']"));
+//		rfqVendorSelection.click();
+//		Thread.sleep(3000);
+//
+//		// Vendor selection multiple using Array
+//		String[] vendorSelectionRfq = { "Mayer Dowa Enterprice", "Chowdhury Motors" };
+//
+//		for (int i = 0; i < vendorSelectionRfq.length; i++) {
+//			WebElement vendorDropdown = driver.findElement(By.xpath("//input[@id='o_field_input_372']"));
+////			WebElement vendorDropdown = driver.findElement(By.xpath("//div[@name='vendor_ids']"));
+//
+//			vendorDropdown.click();
+//			Thread.sleep(200);
+//
+//			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(20));
+//			WebElement vendorSelect = wait1.until(ExpectedConditions
+//					.presenceOfElementLocated(By.xpath("//a[text()='" + vendorSelectionRfq[i] + "']")));
+//
+//			// Click the dropdown element
+//			vendorSelect.click();
+//
+//			// Wait for the specific item in the dropdown to be clickable
+//
+//			Thread.sleep(2000);
+//			try {
+//				Thread.sleep(3000); // Wait for 1 second (1000 milliseconds)
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//
+//
 
 
 

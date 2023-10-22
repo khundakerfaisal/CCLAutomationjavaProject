@@ -22,4 +22,7 @@
     <fullyQualifiedTypeName name="org.openqa.selenium.WebElement"/>
     <fullyQualifiedTypeName name="org.openqa.selenium.Keys"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="org.openqa.selenium.support.ui.FluentWait"/>
+    <fullyQualifiedTypeName name="org.openqa.selenium.ElementNotInteractableException"/>
+    <fullyQualifiedTypeName name="org.openqa.selenium.support.ui.Wait"/>
 </qualifiedTypeNameHistroy>
