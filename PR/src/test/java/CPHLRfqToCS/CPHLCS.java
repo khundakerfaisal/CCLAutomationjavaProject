@@ -1,11 +1,14 @@
 package CPHLRfqToCS;
 
+
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+
 
 public class CPHLCS {
 
@@ -60,22 +63,42 @@ public class CPHLCS {
 		WebElement csCompareButton = driver.findElement(By.xpath("//button[@name='action_comparative_statement']"));
 		csCompareButton.click();
 		Thread.sleep(3000);
+		
 
-		///////////////////// Open a new tab//////////////////////////////////////////
-		((JavascriptExecutor) driver).executeScript("window.open()");
-
-		/////////////////// Get all window handles///////////////////////////////////
-		java.util.Set<String> windowHandles = driver.getWindowHandles();
-
-		//////////////////// Switch to the new tab////////////////////////////////
-		for (String handle : windowHandles) {
-			driver.switchTo().window(handle);
-		}
-
+		java.util.Set<String> browserTabHandle=driver.getWindowHandles();
+		
+		java.util.Iterator<String> iterator = browserTabHandle.iterator();
+		
+//		String ParrentWindow=iterator.next();
+		String ChildWindow=iterator.next();
+		
+		driver.switchTo().window(ChildWindow);
+		Thread.sleep(2000);
 		WebElement csVendorSelection = driver.findElement(By.xpath("//a[text()='Select']"));
 		csVendorSelection.click();
 
-		Thread.sleep(1000);
+		Thread.sleep(2000);
+		
+//		driver.switchTo().window(ParrentWindow);
+		
+		
+
+		/////////////////////you can change by using this code or Open a new tab//////////////////////////////////////////
+//		((JavascriptExecutor) driver).executeScript("window.open()");
+
+		/////////////////// Get all window handles///////////////////////////////////
+//		java.util.Set<String> windowHandles = driver.getWindowHandles();
+
+		//////////////////// Switch to the new tab////////////////////////////////
+//		for (String handle : windowHandles) {
+//			driver.switchTo().window(handle);
+//		}
+			
+//		WebElement csVendorSelection = driver.findElement(By.xpath("//a[text()='Select']"));
+//		csVendorSelection.click();
+//		Thread.sleep(1000);
+		
+		/////////////////////End tab chosing operation//////////////////////////////////////////
 
 		WebElement csSendToSCMHOD = driver.findElement(By.xpath("//button[@name='action_send_to_scm_hod']"));
 		csSendToSCMHOD.click();
