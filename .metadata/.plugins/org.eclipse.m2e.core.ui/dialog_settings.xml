@@ -2,6 +2,8 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="C:\CPHLAutomationProject"/>
+			<item value="H:\CPHLAutomationProject"/>
 			<item value="C:\CCLAutomationjavaProject"/>
 			<item value="C:\eclips-workspace"/>
 			<item value="C:\eclips-workspace\CPHLPr"/>
@@ -48,20 +50,12 @@
 	</section>
 	<section name="MavenProjectWizardArtifactPage">
 		<list key="groupId">
-			<item value="PurchaseRequest"/>
-			<item value="cphl"/>
-			<item value="CPHPr"/>
-			<item value="com.star"/>
+			<item value="CPHL"/>
 		</list>
 		<list key="name">
-			<item value="CCLPurchaseRequest"/>
-			<item value="gfsdfgfdg"/>
-			<item value="PurchaseRequest"/>
 		</list>
 		<list key="artifactId">
-			<item value="PR"/>
-			<item value="PurchaseRequest"/>
-			<item value="CPHLPr"/>
+			<item value="CPHLAutomationProject"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
@@ -81,7 +75,7 @@
 	</section>
 	<section name="org.eclipse.m2e.core.ui.internal.dialogs.MavenRepositorySearchDialog">
 		<item key="width" value="480"/>
-		<item key="height" value="665"/>
+		<item key="height" value="667"/>
 		<item key="x" value="731"/>
 		<item key="y" value="74"/>
 	</section>
