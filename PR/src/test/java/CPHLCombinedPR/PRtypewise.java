@@ -33,7 +33,8 @@ public class PRtypewise {
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//a[@data-menu-xmlid='purchase.menu_purchase_root']")).click();
 		Thread.sleep(2000);
-		driver.findElement(By.xpath("//button[@data-original-title='Create record']")).click();
+		WebElement createRecored = driver.findElement(By.xpath("//button[@data-original-title='Create record']"));
+		createRecored.click();
 		Thread.sleep(2000);
 
 		driver.findElement(By.xpath("//div[@name='budget_line_id']")).click();
@@ -95,21 +96,21 @@ public class PRtypewise {
 		optionToSelect.click();
 		Thread.sleep(2000);
 
-		String[] requisitionTypeSelection = { "Local","Foreign","Site Purchase" };
-
+		String[] requisitionTypeSelection = { "Local" };
+//		String[] requisitionTypeSelection = { "Foreign" };
+//		String[] requisitionTypeSelection = { "Site Purchase" };
+//		String[] requisitionTypeSelection = { "Local","Foreign","Site Purchase" };
 
 		for (int i = 0; i < requisitionTypeSelection.length; i++) {
 			WebElement requisition_typeSelect = driver.findElement(By.xpath("//select[@name='requisition_type']"));
 			requisition_typeSelect.click();
 			Thread.sleep(200);
-			
-		    Select requisition_typeselectoptions = new Select(requisition_typeSelect);
-//			Select requisition_typeselectoptions = new Select(requisition_typeSelect);
-//			requisition_typeselectoptions.selectByVisibleText("Local");
+
+			Select requisition_typeselectoptions = new Select(requisition_typeSelect);
 			requisition_typeselectoptions.selectByVisibleText(requisitionTypeSelection[i]);
 			Thread.sleep(2000);
-			
-		if (requisitionTypeSelection[i].equals("Local")) {
+
+			if (requisitionTypeSelection[i].equals("Local")) {
 				WebElement lineSelection = driver.findElement(By.xpath("//a[text()='Add a line']"));
 				lineSelection.click();
 				Thread.sleep(2000);
@@ -120,7 +121,8 @@ public class PRtypewise {
 				dropdownElementProduct1.click();
 				Thread.sleep(2000);
 
-				WebElement itemToSelect = driver.findElement(By.xpath("//a[contains(text(), '02 pin plug - (91E6100112)')]"));
+				WebElement itemToSelect = driver
+						.findElement(By.xpath("//a[contains(text(), '02 pin plug - (91E6100112)')]"));
 				itemToSelect.click();
 				Thread.sleep(2000);
 
@@ -136,22 +138,90 @@ public class PRtypewise {
 				// Click the "Ok" button
 				okButton.click();
 				Thread.sleep(2000);
-				
+
 				LocalPOApprover function = new LocalPOApprover(driver); // Create an instance of the class
-		        function.POApprover();
-				
+				function.POApprover();
+
 				System.out.println("Purchase requsition Successfully Completed!");
 				Thread.sleep(3000);
+				
 				driver.quit();
-			
-			}
-		
 
-			
+			} else if (requisitionTypeSelection[i].equals("Site Purchase")) {
+				WebElement lineSelection = driver.findElement(By.xpath("//a[text()='Add a line']"));
+				lineSelection.click();
+				Thread.sleep(2000);
+
+				// Start Using Singel item selection with out loop //
+
+				WebElement dropdownElementProduct1 = driver.findElement(By.xpath("//td[@name='product_id']"));
+				dropdownElementProduct1.click();
+				Thread.sleep(2000);
+
+				WebElement itemToSelect = driver
+						.findElement(By.xpath("//a[contains(text(), '02 pin plug - (91E6100112)')]"));
+				itemToSelect.click();
+				Thread.sleep(2000);
+
+				WebElement prQty = driver.findElement(By.xpath("//input[@name='product_qty']"));
+				prQty.clear();
+				prQty.sendKeys("5.000");
+				Thread.sleep(2000);
+
+				// Invisible Modal comming for this reason it is need to close [Windows Modal OK
+				// button pressed]
+
+				WebElement okButton = driver.findElement(By.xpath("//button[text()='Ok']"));
+				// Click the "Ok" button
+				okButton.click();
+				Thread.sleep(2000);
+
+				SitePoApprover function = new SitePoApprover(driver); // Create an instance of the class
+				function.SiteApproverPo();
+
+				System.out.println("Site Purchase requsition Successfully Completed!");
+				Thread.sleep(3000);
+				driver.quit();
+
+			} else if (requisitionTypeSelection[i].equals("Foreign")) {
+				WebElement lineSelection = driver.findElement(By.xpath("//a[text()='Add a line']"));
+				lineSelection.click();
+				Thread.sleep(2000);
+
+				// Start Using Singel item selection with out loop //
+
+				WebElement dropdownElementProduct1 = driver.findElement(By.xpath("//td[@name='product_id']"));
+				dropdownElementProduct1.click();
+				Thread.sleep(2000);
+
+				WebElement itemToSelect = driver
+						.findElement(By.xpath("//a[contains(text(), '02 pin plug - (91E6100112)')]"));
+				itemToSelect.click();
+				Thread.sleep(2000);
+
+				WebElement prQty = driver.findElement(By.xpath("//input[@name='product_qty']"));
+				prQty.clear();
+				prQty.sendKeys("5.000");
+				Thread.sleep(2000);
+
+				// Invisible Modal comming for this reason it is need to close [Windows Modal OK
+				// button pressed]
+
+				WebElement okButton = driver.findElement(By.xpath("//button[text()='Ok']"));
+				// Click the "Ok" button
+				okButton.click();
+				Thread.sleep(2000);
+
+				ForeignPo function = new ForeignPo(driver); // Create an instance of the class
+				function.ForeignPoApprover();
+
+				System.out.println("Foreign requsition Successfully Completed!");
+				Thread.sleep(3000);
+				driver.quit();
+
+			}
 
 		}
-	
-
 
 	}
 
