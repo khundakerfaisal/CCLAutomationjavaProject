@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CCLPI {
 
-	public static void main(String[] args) throws InterruptedException{
+	public static void main(String[] args, int currentNumber) throws InterruptedException{
 		WebDriver driver = new ChromeDriver();
 		ChromeOptions Option = new ChromeOptions();
 		Option.addArguments("--remote-allow-origins=*");
@@ -73,14 +73,18 @@ public class CCLPI {
 		
 		piColumn.clear();
 		piColumn.click();
+		AutoNumberDuplicateChecking.generateUniqueProformaNumber(driver, currentNumber);
+		{
+			piColumn.sendKeys("currentNumber");
+		}
+		
 //		piColumn.sendKeys();
 //		piColumn.sendKeys("Pi-2023-00001");
 //		Thread.sleep(2000);
 
 
 		
-		AutoNumberDuplicateChecking function= new AutoNumberDuplicateChecking(driver);
-		function.checkForDuplicateProformaNumber();
+
 		Thread.sleep(2000);
 
 
