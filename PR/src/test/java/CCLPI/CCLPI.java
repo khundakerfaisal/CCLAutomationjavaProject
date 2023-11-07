@@ -1,8 +1,13 @@
 package CCLPI;
 
 import java.time.Duration;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,7 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CCLPI {
 
-	public static void main(String[] args, int currentNumber) throws InterruptedException{
+	public static void main(String[] args) throws InterruptedException {
 		WebDriver driver = new ChromeDriver();
 		ChromeOptions Option = new ChromeOptions();
 		Option.addArguments("--remote-allow-origins=*");
@@ -53,7 +58,6 @@ public class CCLPI {
 		WebElement PoDropdownSelect = driver.findElement(By.xpath("//div[@name='purchase_order_ids']"));
 		PoDropdownSelect.click();
 
-
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		WebElement PoDropdownValueSelect = wait
 				.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul[@id='ui-id-5']/li[1]/a")));
@@ -67,37 +71,70 @@ public class CCLPI {
 		WebElement CurrencyDropdownValueSelect = driver.findElement(By.xpath("//a[text()='USD']"));
 		CurrencyDropdownValueSelect.click();
 		Thread.sleep(2000);
-		
+
+//		AutoNumberDuplicateChecking autoNumberChecker = new AutoNumberDuplicateChecking(driver);
+//		
+//		autoNumberChecker.getTotalGenerated();
+//		String proformaNumber = autoNumberChecker.generateUniqueProformaNumber();
+
 		WebElement piColumn = driver.findElement(
 				By.xpath("//input[@class='o_field_char o_field_widget o_quick_editable o_input o_required_modifier']"));
-		
+
 		piColumn.clear();
 		piColumn.click();
-		AutoNumberDuplicateChecking.generateUniqueProformaNumber(driver, currentNumber);
-		{
-			piColumn.sendKeys("currentNumber");
+
+
+		Set<String> generatedNumbers = new HashSet<>();
+		Random random = new Random();
+
+		while (generatedNumbers.size() < 1) {
+			// Generate a random number
+			String newNumber = generatePIFormatNumber(2023, random.nextInt(1000000));
+
+			// Check for duplicates
+			if (!generatedNumbers.contains(newNumber)) {
+				// Add the unique number to the set
+				generatedNumbers.add(newNumber);
+
+				// Perform actions with the generated number, e.g., input it into a text field
+				WebElement numberInput = driver.findElement(By.xpath("//input[@name='name']"));
+				numberInput.sendKeys(newNumber);
+				
+
+				// Press Enter to submit the value (modify as needed)
+				numberInput.sendKeys(Keys.RETURN);
+			} 
+//				else {
+//				// Handle duplicates (generate a new number)
+//				while (generatedNumbers.contains(newNumber)) {
+//					newNumber = generatePIFormatNumber(2023, random.nextInt(1000000));
+//				}
+//				generatedNumbers.add(newNumber);
+//
+//				// Perform actions with the generated number, e.g., input it into a text field
+//				WebElement numberInput = driver.findElement(By.xpath("//input[@name='name']"));
+//				numberInput.sendKeys(newNumber);
+//
+//				// Press Enter to submit the value (modify as needed)
+//				numberInput.sendKeys(Keys.RETURN);
+//			}
 		}
-		
-//		piColumn.sendKeys();
-//		piColumn.sendKeys("Pi-2023-00001");
-//		Thread.sleep(2000);
-
-
-		
 
 		Thread.sleep(2000);
-
-
 
 		WebElement ProformaSubmit = driver.findElement(By.xpath("//button[@title='Save record']")); // RFQ final
 																									// submission
 		ProformaSubmit.click();
 		Thread.sleep(2000);
 
-
-		
 		System.out.println("Pi created successfully");
 
+	}
+
+	public static String generatePIFormatNumber(int year, int sequence) {
+		String formattedYear = String.format("%04d", year);
+		String formattedSequence = String.format("%06d", sequence);
+		return "PI-" + formattedYear + "-" + formattedSequence;
 	}
 
 }
