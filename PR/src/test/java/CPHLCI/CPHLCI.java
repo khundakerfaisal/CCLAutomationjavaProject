@@ -52,7 +52,6 @@ public class CPHLCI {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		WebElement LcNoDropdownValueSelect = wait
 				.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@class='ui-menu-item'][1]/a")));
-//		WebElement PoDropdownValueSelect = driver.findElement(By.xpath("//ul[@id='ui-id-5']/li[1]/a"));
 		LcNoDropdownValueSelect.click();
 		Thread.sleep(2000);
 
@@ -80,6 +79,7 @@ public class CPHLCI {
 
 				// Press Enter to submit the value (modify as needed)
 				numberInput.sendKeys(Keys.RETURN);
+				System.out.println("Auto number and duplicates checking");
 			}
 
 		}
